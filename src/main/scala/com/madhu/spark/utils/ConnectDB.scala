@@ -16,6 +16,7 @@ object ConnectDB extends SparkSessionFactory {
       .option("password", "1234")
       .load()
 
+
     df.show()
   }
 
