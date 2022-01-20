@@ -1,7 +1,9 @@
 package com.madhu.spark.futureexp
 
+
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
+import scala.concurrent.{Await, Future}
+import scala.concurrent.duration.Duration
 import scala.util.{Failure, Success}
 
 object MultipleFutures extends App {
@@ -30,6 +32,8 @@ object MultipleFutures extends App {
     }
     case Failure(e) => e.printStackTrace
   }
+
+  Await.result(aaplFuture, Duration.Inf)
 
   // important for a short parallel demo: you need to keep
   // the jvm’s main thread alive

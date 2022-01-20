@@ -13,12 +13,16 @@ object DivideByZeroExp  extends SparkSessionFactory{
       ("s2", "3", 4, 0),
       ("d3", "5", 0, 0),
       ("f4", "1", 0, 7),
-      ("g5", "2", 7, 4),
-      ("h6", "6", 4, 9)).toDF("dept", "Id", "marks2", "marks3")
+      ("", "2", 7, 4),
+      (null, "6", 4, 9)).toDF("dept", "Id", "marks2", "marks3")
 
     df1
       .withColumn("percentage", lit(100.0)/($"marks2" * $"marks3"))
+      //.withColumn("date", regexp_replace($"dept", null, "ddd"))
       .na.fill(0.0, Seq("percentage"))
+
+      .withColumn("dept", coalesce($"dept", lit("djdjd")))
+     // .filter($"percentage".isNull)
       .show
   }
 

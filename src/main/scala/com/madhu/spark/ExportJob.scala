@@ -6,7 +6,7 @@ import org.apache.log4j.{LogManager, Logger}
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.lit
 import scopt.OptionParser
-
+import org.apache.spark.sql.functions._
 object ExportJob extends SparkSessionFactory {
 
   val log: Logger = LogManager.getLogger(this.getClass)
@@ -78,7 +78,7 @@ object ExportJob extends SparkSessionFactory {
 
     val finalDF = csvDF
       .withColumn("week_number", lit(202015))
-
+      .select(col("dfdf"))
     ExportUtils.writeToCsv(outputFilePath, "FACTOR.csv", finalDF)
   }
 

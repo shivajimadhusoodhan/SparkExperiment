@@ -1,28 +1,31 @@
 package com.madhu.spark;
 
 
+import java.time.LocalDate;
+
 public class RentCalculator {
 
     public static void main(String[] args) {
 
         // variables
-        String month = "JULY";
-        String prevMonth = "06";
-        String currMonth = "07";
-        int numOfTenants = 2;
-
-        int flat1Ebill = 600 ; // add 50 for solar rebate //669--382
+        int flat1Ebill = 851 + 50; // add 50 for solar rebate //669--382
         int flat2Ebill = 0;                           // 731--098
-        int flat3Ebill = 637;                            //674--689
-        int commonAreaEbill = 216; // round off to nearest number divisable by 3
+        int flat3Ebill = 568 + 50;                            //674--689
+        int commonAreaEbill = 267; // round off to nearest number divisable by 3
+
+        
+        String month = LocalDate.now().minusMonths(1).getMonth().toString();
+        int prevMonth = LocalDate.now().minusMonths(2).getMonthValue();
+        int currMonth = LocalDate.now().minusMonths(1).getMonthValue();
+        int numOfTenants = 3;
 
         int flat1PrevBalance = 0;
         int flat2PrevBalance = 0;
         int flat3PrevBalance = 0;
 
         int flat1Rent = 12000;
-        int flat2Rent = 11000;
-        int flat3Rent = 8950;
+        int flat2Rent = 8500;
+        int flat3Rent = 8925;
 
         // Calculations
         int maintananceBill = Math.round(commonAreaEbill/numOfTenants);
@@ -33,11 +36,11 @@ public class RentCalculator {
 
     }
 
-    public static void calculateRent(int flatNum, int rent, int eBill, int maintainance, int prevBalance, String prevMonth, String currMonth, String month) {
+    public static void calculateRent(int flatNum, int rent, int eBill, int maintainance, int prevBalance, int prevMonth, int currMonth, String month) {
         String newLine = System.getProperty("line.separator");
 
         System.out.println("FLAT" + flatNum +" BILL :");
-        System.out.println("-------------");
+        System.out.println("------------------------");
         String finalFlat = "ELECTRICITY (15/" + prevMonth + " - 15/" + currMonth + "): "+  (eBill + maintainance) + "(" + eBill +"+"+ maintainance +")"
                 .concat(newLine)
                 .concat(month + " RENT: " + rent)

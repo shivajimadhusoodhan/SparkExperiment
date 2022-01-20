@@ -28,7 +28,6 @@ object CSVanalysis extends SparkSessionFactory{
 
     val finalDF = calcFilePathDF
 
-
     finalDF.show()
 
   }
