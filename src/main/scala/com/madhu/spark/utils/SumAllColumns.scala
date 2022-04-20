@@ -32,6 +32,7 @@ object SumAllColumns  extends  SparkSessionFactory{
       ("5", "2", 7, 3),
       ("6", "6", 4, 3)).toDF("Id", "Actual_Name", "marks1", "marks2")
       .withColumn("sum", sumOfSlots(slotCols))
+
      // .withColumn("sum", sumOfSlots(Seq(col("marks1"), col("marks2"))))
 
     df1.show(20)

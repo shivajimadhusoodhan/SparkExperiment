@@ -2,6 +2,7 @@ package com.madhu.spark.utils
 
 import com.madhu.spark.common.SparkSessionFactory
 import org.apache.spark.sql.functions._
+import org.apache.spark.sql.types.{Decimal, DecimalType}
 
 object DivideByZeroExp  extends SparkSessionFactory{
 
@@ -18,6 +19,7 @@ object DivideByZeroExp  extends SparkSessionFactory{
 
     df1
       .withColumn("percentage", lit(100.0)/($"marks2" * $"marks3"))
+      .withColumn("percentage", $"percentage".cast(DecimalType(25, 2)))
       //.withColumn("date", regexp_replace($"dept", null, "ddd"))
       .na.fill(0.0, Seq("percentage"))
 

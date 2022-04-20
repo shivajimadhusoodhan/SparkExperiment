@@ -20,7 +20,10 @@ object AvgGrouping  extends  SparkSessionFactory{
         .avg("marks")*/
      // .withColumn("sum", sumOfSlots(Seq(col("marks1"), col("marks2"))))
 
-    val ab =df1.filter(col("marks").equalTo(6)).select("marks").as[String].collect.head.toInt
+    val ab =df1
+      .filter(col("marks").equalTo(6))
+      .select("marks").as[String]
+      .collect.head.toInt
 
     println(ab)
 

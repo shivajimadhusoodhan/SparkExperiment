@@ -23,7 +23,7 @@ object ExceptExperiment extends SparkSessionFactory{
       ("2", "2", 7),
       ("3", "6", 4)).toDF("id1", "name1", "marks1")
 
-    //df2.except(df1).show()
+    df2.except(df1).show()
 
     df1.count() match {
       case 7L => println("7 rows")
