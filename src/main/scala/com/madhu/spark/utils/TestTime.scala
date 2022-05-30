@@ -1,6 +1,8 @@
 package com.madhu.spark.utils
 
+import java.text.SimpleDateFormat
 import java.time.{Clock, LocalDate, LocalDateTime, LocalTime, ZoneOffset}
+import java.util.Calendar
 
 object TestTime {
 
@@ -34,6 +36,15 @@ object TestTime {
 println("2021-06-09T11:21:49.677Z".substring(0,10))
 
     println(p9_end.toString)
+
+
+    def getCurrentdateTimeStamp(): String = {
+      val today: java.util.Date = Calendar.getInstance.getTime
+      new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(today)
+
+    }
+
+    println(s"madhu:: ${getCurrentdateTimeStamp()}")
   }
 
 }
