@@ -5,7 +5,7 @@ import com.madhu.spark.common.SparkSessionFactory
 object ReadBlobStorageFile extends  SparkSessionFactory {
 
   def main(args: Array[String]): Unit = {
-    spark.conf.set(s"fs.azure.account.key.devcddreportingstorage.blob.core.windows.net", "tJDFoSx+jWQ6CwreKGKMtCEOhaEFCjCwo9vBSmd9i7maN0KX/KXBLbqb4k0JirynwlWY3ml/Wri0VoDqDXqPxw==")
+    spark.conf.set(s"")
 
 
     val df = spark.read
