@@ -14,6 +14,7 @@ public class MergeArrays {
     public static void mergeArrays(int[] a, int[] b) {
         int[] c = new int[a.length + b.length];
 
+
         for(int i=0; i<a.length; i++) {
             c[i] = a[i];
         }

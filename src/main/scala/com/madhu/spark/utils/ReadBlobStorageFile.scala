@@ -5,7 +5,7 @@ import com.madhu.spark.common.SparkSessionFactory
 object ReadBlobStorageFile extends  SparkSessionFactory {
 
   def main(args: Array[String]): Unit = {
-    spark.conf.set(s"")
+    //spark.conf.set(s"")
 
 
     val df = spark.read

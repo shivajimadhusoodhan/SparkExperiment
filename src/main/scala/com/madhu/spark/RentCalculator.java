@@ -8,10 +8,10 @@ public class RentCalculator {
     public static void main(String[] args) {
 
         // variables
-        int flat1Ebill = 578 + 50; // add 50 for solar rebate //669--382
+        int flat1Ebill = 1712 + 50; // add 50 for solar rebate //669--382
         int flat2Ebill = 0;                           // 731--098
-        int flat3Ebill = 795 + 50;                            //674--689
-        int commonAreaEbill = 255; // round off to nearest number divisable by 3
+        int flat3Ebill = 497 + 16;                            //674--689
+        int commonAreaEbill = 303; // round off to nearest number divisable by 3
 
         
         String month = LocalDate.now().minusMonths(1).getMonth().toString();
@@ -24,8 +24,8 @@ public class RentCalculator {
         int flat3PrevBalance = 0;
 
         int flat1Rent = 12600;
-        int flat2Rent = 8500;
-        int flat3Rent = 8925;
+        int flat2Rent = 9000;
+        int flat3Rent = 9500;
 
         // Calculations
         int maintananceBill = Math.round(commonAreaEbill/numOfTenants);

@@ -38,6 +38,6 @@ object WordCountDF  extends SparkSessionFactory {
 
     val fs = FileSystem.get(spark.sparkContext.hadoopConfiguration)
 
-    FileUtil.copyMerge(fs, new Path(s"${filePath}_temp"), fs, new Path(filePath), true, spark.sparkContext.hadoopConfiguration, null)
+    //FileUtil.copyMerge(fs, new Path(s"${filePath}_temp"), fs, new Path(filePath), true, spark.sparkContext.hadoopConfiguration, null)
   }
 }

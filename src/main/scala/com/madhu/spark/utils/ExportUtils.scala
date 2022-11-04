@@ -45,7 +45,7 @@ object ExportUtils {
     }
 
     val tmpCsvSourceDirectory: Path = moveOnlyCsvFilesToOtherDirectory
-    FileUtil.copyMerge(fs, tmpCsvSourceDirectory, fs, outputFile, true, spark.sparkContext.hadoopConfiguration, null) // scalastyle:ignore
+    //FileUtil.copyMerge(fs, tmpCsvSourceDirectory, fs, outputFile, true, spark.sparkContext.hadoopConfiguration, null) // scalastyle:ignore
     fs.delete(sourceDirectory, true)
   }
 
