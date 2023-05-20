@@ -1,0 +1,29 @@
+# Sample YAML File
+
+# YAML supports comments
+
+# Scalar Values
+name: John Smith
+age: 30
+city: New York
+
+# Lists
+hobbies:
+  - reading
+  - hiking
+  - cooking
+
+# Nested Objects
+address:
+  homeName:
+    floor: 1
+    type: duplex
+  street: 123 Main St
+  city: San Francisco
+  country: USA
+
+# Boolean Values
+isEmployed: true
+
+# Null Value
+favoriteColor: null

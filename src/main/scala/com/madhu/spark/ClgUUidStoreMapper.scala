@@ -34,7 +34,7 @@ object ClgUUidStoreMapper extends SparkSessionFactory {
       .cache()
 
 
-    clgEmpFileDF.show(3)
+   /* clgEmpFileDF.show(3)
     println(s"clgEmpFileDF :: ${clgEmpFileDF.count()}")
 
     storePersonFileDF.show(3)
@@ -45,8 +45,8 @@ object ClgUUidStoreMapper extends SparkSessionFactory {
       .join(clgEmpFileDF, Seq("employee_number"))
       .cache()
 
-    println(s"finalDF :: ${finalDF.count()}")
-    finalDF.show(20)
+    println(s"finalDF :: ${finalDF.count()}")*/
+    //finalDF.show(20)
 
 //    finalDF.select("store_number", "colleague_uuid")
 //      .coalesce(1)

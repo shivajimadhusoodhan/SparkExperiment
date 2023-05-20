@@ -13,15 +13,15 @@ object FirstAssignment extends  SparkSessionFactory{
 
   val squareUdf: UserDefinedFunction = udf(convertToSquare)
 
-  def transformDF(inputDF: DataFrame, udfMap: Map[String, UserDefinedFunction]) = {
+  /*def transformDF(inputDF: DataFrame, udfMap: Map[String, UserDefinedFunction]) = {
 
-    val listm = List("df", "ddf")
+    //val listm = List("df", "ddf")
 
     udfMap.foldLeft(inputDF:DataFrame) {
       case (tempDf, (columnName, udf)) => tempDf.withColumn(columnName, udf(col(columnName)))
     }
     inputDF
-  }
+  }*/
 
   def main(args: Array[String]): Unit = {
 

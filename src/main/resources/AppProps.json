@@ -1,0 +1,78 @@
+{
+  "kafkaConfig" : {
+    "broker": "cddCepBrokers",
+    "securityProtocolConfig": "SASL_SSL",
+    "saslMechanism": "SCRAM-SHA-256",
+    "sslTrustStoreLocation": "/kafka.client.truststore.jks",
+    "sslTrustStorePassword": "cepSslTrustStorePassword",
+    "saslJaasConfig": "cepSaslJaasConfig"
+  },
+  "azureSqlConfig": {
+    "url": "cddAzureSqlUrl",
+    "username": "cddAzureSqlUsername",
+    "password": "CddSqldbPassword"
+  },
+  "restApiConfigs": [
+    {
+      "appName": "employeeApi",
+      "username": "cddemployeeAPIUsername",
+      "password": "cddemployeeAPIPassword",
+      "access_token_url": "cddemployeeAPIAccessTokenUrl",
+      "get_url": "cddemployeeApiClgEndpoint"
+    },
+    {
+      "appName": "absenceApi",
+      "username": "cddAbsenceAPIUsername",
+      "password": "cddAbsenceAPIPassword",
+      "get_url": "cddAbsenceAPIUrl"
+    }
+  ],
+  "rowFieldMapping": {
+    "tableMapping": {
+      "df1": [
+        {
+          "sourceField": "cid",
+          "targetField": "id"
+        },
+        {
+          "sourceField": "ciam_source",
+          "targetField": "iam_source"
+        }
+      ],
+      "df2": [
+        {
+          "sourceField": "sid",
+          "targetField": "id"
+        },
+        {
+          "sourceField": "ssource_system",
+          "targetField": "source_system"
+        }
+      ]
+    }
+  },
+
+  "exceptionConfig": {
+    "dlqTopic": "dlq-topic",
+    "retryDelayTime": 900000
+  },
+
+  "azureBlobConfig": {
+    "connectionString": "CddStorageConnectionString",
+    "containerName": "dev-cep-clg-streaming"
+  },
+
+  "inputTables": {
+    "employeeEmployeeMapping": "employee_uuid_employee_mapping"
+  },
+
+  "azureQueueConfig": {
+    "connectionString": "CddStorageConnectionString",
+    "maxDequeCount": 5,
+    "timeToLive": -1,
+    "initialVisibilityDelaySeconds": 900,
+    "visibilityTimeOutSeconds": 900
+  },
+
+  "keyvaultMountPath": "/mnt/secrets-store/"
+}

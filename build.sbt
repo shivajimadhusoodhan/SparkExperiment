@@ -23,6 +23,8 @@ libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.8" % Test
 // https://mvnrepository.com/artifact/org.apache.spark/spark-hadoop-cloud
 libraryDependencies += "org.apache.spark" %% "spark-hadoop-cloud" % "3.2.0"
 
+libraryDependencies += "org.yaml" % "snakeyaml" % "1.29"
+
 // https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-aws
 //libraryDependencies += "org.apache.hadoop" % "hadoop-aws" % "3.2.0"
 
