@@ -38,13 +38,21 @@ case class RestApiConfig(
                         )
 
 case class RowFieldMapping(
-                            tableMapping: Map[String, List[SourceTargetMapping]]
+                            tableMapping: Map[String, List[SourceTargetMapping]],
+                            transformationMapping: Map[String, List[TransformationMapping]]
                          )
 
 case class SourceTargetMapping(
                                 sourceField: String,
                                 targetField: String
                               )
+
+case class TransformationMapping(
+                                  newColumnName: String,
+                                  sourceColumnName: String,
+                                  conditionalOperator: String,
+                                  valuesList: List[String]
+                                )
 case class ExceptionConfig(
                             dlqTopic: String,
                             retryDelayTime: Long

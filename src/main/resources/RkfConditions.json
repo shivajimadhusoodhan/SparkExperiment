@@ -1,0 +1,27 @@
+{
+  "rkfName": "ZVVCAS",
+  "fetchFromColumn": "maths",
+
+  "rkfConditions": [
+    {
+      "filterColumnName": "source_system",
+      "filterOperator": "IS_IN",
+      "filterValue": [
+        "IAM"
+      ]
+    },
+    {
+      "filterColumnName": "iam_source",
+      "filterOperator": "LIKE",
+      "filterValue": [
+        "Huma*",
+        "Tes*"
+      ]
+    },
+    {
+      "filterColumnName": "id",
+      "filterOperator": "DYNAMIC",
+      "filterValue": []
+    }
+  ]
+}

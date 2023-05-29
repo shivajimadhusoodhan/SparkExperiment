@@ -1,0 +1,11 @@
+﻿"0CALMONTH","Distribution Channel","Billing Type","Transaction Type","STT Quantity","Volume in CS","STT GSV (Gross Value)","Revenue","Sales Ret and Allow"
+"JAN,2021",[10]DBG,[D1] Sale,[B] Dir.posting from FI,10,90,200,100,400
+"JAN,2021",[11] FP Distributive Trad,[D1] Sale,[B] Dir.posting from FI,20,80,201,101,401
+"JAN,2021",[12] FP Traditinal Trad,[S1] Cancel. Invoice(S1),[B] Dir.posting from FI,30,70,202,102,402
+"FEB,2021",[20] MODERN TRADE,[S1] Cancel. Invoice(S1),[B] Dir.posting from FI,40,60,203,103,403
+"FEB,2021",[21] FP Modern Trade,[D1] Sale,[B] Dir.posting from FI,50,50,204,104,404
+"FEB,2021",[10]DBG,[D1] Sale,[B] Dir.posting from FI,60,40,205,105,405
+"MAR,2021",[11] FP Distributive Trad,[D2] Retails,[B] Dir.posting from FI,70,30,206,106,406
+"MAR,2021",[12] FP Traditinal Trad,[D1] Sale,[B] Dir.posting from FI,80,20,207,107,407
+"MAR,2021",[20] MODERN TRADE,[D2] Retails,[B] Dir.posting from FI,90,10,208,108,408
+"APR,2021",[21] FP Modern Trade,[S1] Cancel. Invoice(S1),[B] Dir.posting from FI,100,25,209,109,409

@@ -2,7 +2,7 @@ package com.madhu.nutriasia
 
 import com.madhu.spark.common.SparkSessionFactory
 import org.apache.spark.sql.DataFrame
-import org.apache.spark.sql.functions.col
+import org.apache.spark.sql.functions.{col, when}
 
 object ParameterisedUnionDiffDataSets extends SparkSessionFactory with ConfigReader {
 
@@ -17,11 +17,20 @@ object ParameterisedUnionDiffDataSets extends SparkSessionFactory with ConfigRea
       ("a4", "Tesco Mobile", "IAM", 7))
       .toDF("cid", "ciam_source", "source_system", "maths")
 
-    val filterList = List("a1", "a3")
-    val condition = col("cid") isin (filterList:_*)
+    val appProps = getAppProperties("AppProps.json")
 
-    df1.filter(condition).show()
+    val df1Mapping = appProps.rowFieldMapping.tableMapping.filterKeys(_ equals ("df1")).get("df1").get
+    println(df1Mapping)
 
+    val df1Processed = renameColumnsBasedOnMapping(df1, df1Mapping)
+    //df1Processed.show()
+
+    val df1Transformation = appProps.rowFieldMapping.transformationMapping.filterKeys(_ equals("df1")).get("df1").get
+//    val filterList = List("a1", "a3")
+//    val condition = col("cid") isin (filterList:_*)
+
+    val df1Transformed = transformDataframe(df1Processed, df1Transformation)
+    df1Transformed.show()
 
 
 
@@ -46,13 +55,7 @@ object ParameterisedUnionDiffDataSets extends SparkSessionFactory with ConfigRea
     //FINAL COLUMNS
     // ID  IAM_SOURCE SOURCE_SYSTEM MATHS SCIENCE
 
-    val appProps = getAppProperties("AppProps.json")
 
-    val df1Mapping = appProps.rowFieldMapping.tableMapping.filterKeys(_ equals ("df1")).get("df1").get
-    println(df1Mapping)
-
-    val df1Processed = renameColumnsBasedOnMapping(df1, df1Mapping)
-    //df1Processed.show()
 
     val df2Mapping = appProps.rowFieldMapping.tableMapping.filterKeys(_ equals ("df2")).get("df2").get
     println(df2Mapping)
@@ -73,6 +76,13 @@ object ParameterisedUnionDiffDataSets extends SparkSessionFactory with ConfigRea
     import spark.implicits._
     mappingColumns.foldLeft(devDF)((tempDF, mapping) => {
       tempDF.withColumnRenamed(mapping.sourceField, mapping.targetField)
+    })
+  }
+
+  def transformDataframe(df: DataFrame, mappings: List[TransformationMapping]): DataFrame = {
+    mappings.foldLeft(df)((tempDF, mappings) => {
+      val condition = when(col(mappings.sourceColumnName) isin (mappings.valuesList:_*), col(mappings.sourceColumnName))
+      tempDF.withColumn(mappings.newColumnName, condition)
     })
   }
 }

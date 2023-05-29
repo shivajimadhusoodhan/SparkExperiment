@@ -49,6 +49,20 @@
           "targetField": "source_system"
         }
       ]
+    },
+
+    "transformationMapping": {
+      "df1": [
+        {
+          "newColumnName": "humanica_num",
+          "sourceColumnName": "iam_source",
+          "conditionalOperator": "equal",
+          "valuesList": [
+            "HumanicaMY",
+            "HumanicaTH"
+          ]
+        }
+      ]
     }
   },
 

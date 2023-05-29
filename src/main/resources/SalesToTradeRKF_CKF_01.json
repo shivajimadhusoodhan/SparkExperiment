@@ -1,0 +1,69 @@
+{
+  "rkfEntities": [
+    {
+      "rkfName": "STT Quantity Original",
+      "fetchFromColumn": "STT Quantity",
+      "rkfConditions": [
+        {
+          "filterColumnName": "Distribution Channel",
+          "filterOperator": "IS_IN",
+          "filterValue": [
+            "[10]DBG",
+            "[11] FP Distributive Trad",
+            "[12] FP Traditinal Trad"
+          ]
+        }
+      ]
+    },
+    {
+      "rkfName": "STT of Other Channels QTY",
+      "fetchFromColumn": "Volume in CS",
+      "rkfConditions": [
+        {
+          "filterColumnName": "Distribution Channel",
+          "filterOperator": "IS_IN",
+          "filterValue": [
+            "[20] MODERN TRADE",
+            "[21] FP Modern Trade"
+          ]
+        }
+      ]
+    },
+    {
+      "rkfName": "STT GSV New (Gross Value)",
+      "fetchFromColumn": "STT GSV (Gross Value)",
+      "rkfConditions": [
+        {
+          "filterColumnName": "Distribution Channel",
+          "filterOperator": "IS_IN",
+          "filterValue": [
+            "[10]DBG",
+            "[11] FP Distributive Trad",
+            "[12] FP Traditinal Trad"
+          ]
+        }
+      ]
+    },
+    {
+      "rkfName": "STT GSV Others",
+      "fetchFromColumn": "Revenue",
+      "rkfConditions": [
+        {
+          "filterColumnName": "Distribution Channel",
+          "filterOperator": "IS_IN",
+          "filterValue": [
+            "[20] MODERN TRADE",
+            "[21] FP Modern Trade"
+          ]
+        },
+        {
+          "filterColumnName": "Billing Type",
+          "filterOperator": "NOT_IN",
+          "filterValue": [
+            "[S1] Cancel. Invoice(S1)"
+          ]
+        }
+      ]
+    }
+  ]
+}

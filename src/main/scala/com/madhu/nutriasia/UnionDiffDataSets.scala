@@ -13,12 +13,14 @@ object UnionDiffDataSets extends SparkSessionFactory {
       ("a2", "HumanicaTH", "IAM", 0),
       ("a3", "XPD8", "IAM", 0),
       ("a4", "Tesco Mobile", "IAM", 7)).toDF("id", "iam_source", "source_system", "maths")
+    df1.show()
 
     val df2 = Seq(
       ("a1", "HumanicaMY", "IAM", 23),
       ("a2", "HumanicaTH", "IAM", 23),
       ("a3", "XPD8", "IAM", 20),
       ("a4", "Tesco Mobile", "IAM", 37)).toDF("id", "iam_source", "source_system", "science")
+    df2.show()
 
     val df3 = Seq(
       ("a1", "HumanicaMY", "IAM"),
@@ -26,6 +28,7 @@ object UnionDiffDataSets extends SparkSessionFactory {
       ("a3", "XPD8", "IAM"),
       ("a4", "Tesco Mobile", "IAM")).toDF("id", "source", "source_system")
       .withColumnRenamed("source", "iam_source")
+    df3.show()
 
     val finalDF = df1
       .unionByName(df2, true)
