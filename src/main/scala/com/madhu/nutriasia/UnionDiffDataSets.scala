@@ -12,7 +12,8 @@ object UnionDiffDataSets extends SparkSessionFactory {
       ("a1", "HumanicaMY", "IAM", 3),
       ("a2", "HumanicaTH", "IAM", 0),
       ("a3", "XPD8", "IAM", 0),
-      ("a4", "Tesco Mobile", "IAM", 7)).toDF("id", "iam_source", "source_system", "maths")
+      ("a4", "Tesco Mobile", "IAM", 7)
+    ).toDF("id", "iam_source", "source_system", "maths")
     df1.show()
 
     val df2 = Seq(

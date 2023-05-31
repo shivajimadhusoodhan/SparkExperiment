@@ -2,7 +2,7 @@ package com.madhu.nutriasia
 
 import com.madhu.spark.common.SparkSessionFactory
 import org.apache.spark.sql.{Column, DataFrame}
-import org.apache.spark.sql.functions.{col, lit, when}
+import org.apache.spark.sql.functions.{col, lit, sum, when}
 
 object RKFonDataSets extends SparkSessionFactory with ConfigReader {
 
@@ -19,7 +19,11 @@ object RKFonDataSets extends SparkSessionFactory with ConfigReader {
       ("a4", "HumanicaTH", "SM", 7))
       .toDF("id", "iam_source", "source_system", "maths")
 
-    df1.show()
+    df1.show(false)
+//    df1
+//      .withColumn("science", lit(1))
+//      .withColumn("total", col("science") + $"maths")
+//      .show()
 
     /*df1
       .withColumn("newExp", when(col("iam_source").rlike("Huma*") || col("iam_source").rlike("Tes*"), lit("crazy")))

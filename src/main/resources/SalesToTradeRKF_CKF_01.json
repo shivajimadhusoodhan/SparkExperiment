@@ -1,11 +1,11 @@
 {
   "rkfEntities": [
     {
-      "rkfName": "STT Quantity Original",
-      "fetchFromColumn": "STT Quantity",
+      "rkfName": "ZRKF_STTQTY_ORIG",
+      "fetchFromColumn": "ZSTTQTY",
       "rkfConditions": [
         {
-          "filterColumnName": "Distribution Channel",
+          "filterColumnName": "0DISTR_CHAN",
           "filterOperator": "IS_IN",
           "filterValue": [
             "[10]DBG",
@@ -16,11 +16,11 @@
       ]
     },
     {
-      "rkfName": "STT of Other Channels QTY",
-      "fetchFromColumn": "Volume in CS",
+      "rkfName": "ZRKF_STT_OTHERS",
+      "fetchFromColumn": "ZVVCAS",
       "rkfConditions": [
         {
-          "filterColumnName": "Distribution Channel",
+          "filterColumnName": "0DISTR_CHAN",
           "filterOperator": "IS_IN",
           "filterValue": [
             "[20] MODERN TRADE",
@@ -30,11 +30,11 @@
       ]
     },
     {
-      "rkfName": "STT GSV New (Gross Value)",
-      "fetchFromColumn": "STT GSV (Gross Value)",
+      "rkfName": "ZRKF_STT_GSV",
+      "fetchFromColumn": "ZSTTGSV",
       "rkfConditions": [
         {
-          "filterColumnName": "Distribution Channel",
+          "filterColumnName": "0DISTR_CHAN",
           "filterOperator": "IS_IN",
           "filterValue": [
             "[10]DBG",
@@ -45,11 +45,11 @@
       ]
     },
     {
-      "rkfName": "STT GSV Others",
-      "fetchFromColumn": "Revenue",
+      "rkfName": "ZRKF_STT_GSV_OTHERS",
+      "fetchFromColumn": "ZERLOS",
       "rkfConditions": [
         {
-          "filterColumnName": "Distribution Channel",
+          "filterColumnName": "0DISTR_CHAN",
           "filterOperator": "IS_IN",
           "filterValue": [
             "[20] MODERN TRADE",
@@ -57,13 +57,19 @@
           ]
         },
         {
-          "filterColumnName": "Billing Type",
+          "filterColumnName": "0BILL_TYPE",
           "filterOperator": "NOT_IN",
           "filterValue": [
             "[S1] Cancel. Invoice(S1)"
           ]
         }
       ]
+    }
+  ],
+  "ckfEntities": [
+    {
+      "calcKeyFigureName": "ZCKF_STT_QTY",
+      "calcKeyFigureExpression": "(ZRKF_STTQTY_ORIG + ZRKF_STT_OTHERS)"
     }
   ]
 }

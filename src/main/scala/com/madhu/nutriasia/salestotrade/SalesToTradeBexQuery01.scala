@@ -2,7 +2,7 @@ package com.madhu.nutriasia.salestotrade
 
 import com.madhu.nutriasia.ConfigReader
 import com.madhu.spark.common.SparkSessionFactory
-import org.apache.spark.sql.functions.{col, lit, when}
+import org.apache.spark.sql.functions.{col, expr, lit, when}
 import org.apache.spark.sql.{Column, DataFrame}
 
 object SalesToTradeBexQuery01 extends SparkSessionFactory with ConfigReader {
@@ -20,8 +20,10 @@ object SalesToTradeBexQuery01 extends SparkSessionFactory with ConfigReader {
 
     val rkfConfig = getSalesToTradeQuery01Properties("SalesToTradeRKF_CKF_01.json")
 
-    val resultDF = addRkfBasedOnRkfList(rkfConfig.rkfEntities, CP_DF)
-    resultDF.show(false)
+    val RKF_DF = addRkfBasedOnRkfList(rkfConfig.rkfEntities, CP_DF)
+
+    val CKF_DF = addCkfBasedOnCkfList(rkfConfig.ckfEntities, RKF_DF)
+    CKF_DF.show(false)
   }
 
   def addRkfBasedOnRkfList(rkfList: List[RestKeyFigureEntity], compDF: DataFrame) = {
@@ -52,4 +54,10 @@ object SalesToTradeBexQuery01 extends SparkSessionFactory with ConfigReader {
       .reduce((x, y) => x || y)
   }
 
+  def addCkfBasedOnCkfList(ckfEntities: List[CalcKeyFigureEntity], inputDF: DataFrame) = {
+    ckfEntities.foldLeft(inputDF)((tempDF, ckfEntity) => {
+      tempDF.withColumn(ckfEntity.calcKeyFigureName, expr(ckfEntity.calcKeyFigureExpression))
+    })
+//    inputDF.withColumn("stt_quantity", expr("STT_Quantity_Original + STT_Other_Channels_QTY"))
+  }
 }

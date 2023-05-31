@@ -7,7 +7,7 @@
       "filterColumnName": "source_system",
       "filterOperator": "IS_IN",
       "filterValue": [
-        "IAM"
+        "IAM", "SHD"
       ]
     },
     {

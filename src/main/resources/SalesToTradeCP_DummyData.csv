@@ -1,4 +1,4 @@
-﻿"0CALMONTH","Distribution Channel","Billing Type","Transaction Type","STT Quantity","Volume in CS","STT GSV (Gross Value)","Revenue","Sales Ret and Allow"
+﻿"0CALMONTH","0DISTR_CHAN","0BILL_TYPE","0REC_TYPE","ZSTTQTY","ZVVCAS","ZSTTGSV","ZERLOS","ZVVRET"
 "JAN,2021",[10]DBG,[D1] Sale,[B] Dir.posting from FI,10,90,200,100,400
 "JAN,2021",[11] FP Distributive Trad,[D1] Sale,[B] Dir.posting from FI,20,80,201,101,401
 "JAN,2021",[12] FP Traditinal Trad,[S1] Cancel. Invoice(S1),[B] Dir.posting from FI,30,70,202,102,402

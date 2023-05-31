@@ -1,7 +1,8 @@
 package com.madhu.nutriasia.salestotrade
 
 case class GlobalRkfConfig(
-                            rkfEntities: List[RestKeyFigureEntity]
+                            rkfEntities: List[RestKeyFigureEntity],
+                            ckfEntities: List[CalcKeyFigureEntity]
                           )
 
 case class RestKeyFigureEntity(
@@ -18,3 +19,8 @@ case class RestKeyFigureCondition(
                         startValue: Option[Any],
                         endValue: Option[Any]
                        )
+
+case class CalcKeyFigureEntity (
+                                calcKeyFigureName: String,
+                                calcKeyFigureExpression: String
+                               )
