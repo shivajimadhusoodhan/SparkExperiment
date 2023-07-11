@@ -10,21 +10,10 @@
           "filterValue": [
             "[10]DBG",
             "[11] FP Distributive Trad",
-            "[12] FP Traditinal Trad"
-          ]
-        }
-      ]
-    },
-    {
-      "rkfName": "ZRKF_STT_OTHERS",
-      "fetchFromColumn": "ZVVCAS",
-      "rkfConditions": [
-        {
-          "filterColumnName": "0DISTR_CHAN",
-          "filterOperator": "IS_IN",
-          "filterValue": [
-            "[20] MODERN TRADE",
-            "[21] FP Modern Trade"
+            "[12] FP Traditinal Trad",
+            "10",
+            "11",
+            "12"
           ]
         }
       ]
@@ -39,7 +28,10 @@
           "filterValue": [
             "[10]DBG",
             "[11] FP Distributive Trad",
-            "[12] FP Traditinal Trad"
+            "[12] FP Traditinal Trad",
+            "10",
+            "11",
+            "12"
           ]
         }
       ]
@@ -53,14 +45,77 @@
           "filterOperator": "IS_IN",
           "filterValue": [
             "[20] MODERN TRADE",
-            "[21] FP Modern Trade"
+            "[21] FP Modern Trade",
+            "21",
+            "20"
           ]
         },
         {
           "filterColumnName": "0BILL_TYPE",
           "filterOperator": "NOT_IN",
           "filterValue": [
-            "[S1] Cancel. Invoice(S1)"
+            "[S1] Cancel. Invoice(S1)",
+            "S1"
+          ]
+        }
+      ]
+    },
+    {
+      "rkfName": "ZRKF_STT_OTHERS",
+      "fetchFromColumn": "ZVVCAS",
+      "rkfConditions": [
+        {
+          "filterColumnName": "0DISTR_CHAN",
+          "filterOperator": "IS_IN",
+          "filterValue": [
+            "[20] MODERN TRADE",
+            "[21] FP Modern Trade",
+            "21",
+            "20"
+          ]
+        }
+      ]
+    },
+    {
+      "rkfName": "ZRKF_ZERLOS",
+      "fetchFromColumn": "ZERLOS",
+      "rkfConditions": [
+        {
+          "filterColumnName": "0DOC_TYPE",
+          "filterOperator": "NOT_IN",
+          "filterValue": [
+            "ZOR3",
+            "ZRE3",
+            "ZRS3",
+            "ZOS2"
+          ]
+        }
+      ]
+    },
+    {
+      "rkfName": "ZRKF_ZVVRET_DIR_POST",
+      "fetchFromColumn": "ZVVRET",
+      "rkfConditions": [
+        {
+          "filterColumnName": "0REC_TYPE",
+          "filterOperator": "IS_IN",
+          "filterValue": [
+            "B"
+          ]
+        }
+      ]
+    },
+    {
+      "rkfName": "ZRKF_ZVVRET_DOC_TYPE",
+      "fetchFromColumn": "ZVVRET",
+      "rkfConditions": [
+        {
+          "filterColumnName": "0DOC_TYPE",
+          "filterOperator": "IS_IN",
+          "filterValue": [
+            "ZRT",
+            "ZRE",
+            "ZRS1"
           ]
         }
       ]
@@ -68,8 +123,34 @@
   ],
   "ckfEntities": [
     {
+      "calcKeyFigureName": "ZCKF_NSV",
+      "calcKeyFigureExpression": "ZRKF_ZERLOS - ZVVPPR - ZVVTTA - ZRKF_ZVVRET_DIR_POST + ZRKF_ZVVRET_DOC_TYPE - ZVVTPR - ZVVTPM"
+    },
+    {
+      "calcKeyFigureName": "ZCKF_STT_GSV",
+      "calcKeyFigureExpression": "ZRKF_STT_GSV + ZRKF_STT_GSV_OTHERS"
+    },
+    {
       "calcKeyFigureName": "ZCKF_STT_QTY",
       "calcKeyFigureExpression": "(ZRKF_STTQTY_ORIG + ZRKF_STT_OTHERS)"
     }
-  ]
+  ],
+
+  "logicalNameMapping" : {
+    "0CALMONTH" : "0CALMONTH",
+    "ZSTTQTY" : "STT Quantity",
+    "0DISTR_CHAN": "Distribution Channel",
+    "ZVVCAS": "Volume in CS",
+    "ZSTTGSV": "STT GSV (Gross Value)",
+    "0BILL_TYPE": "Billing Type",
+    "ZERLOS": "Revenue",
+    "0REC_TYPE": "Transaction Type",
+    "0DOC_TYPE": "Sales Document Type",
+    "ZVVRET": "Sales Ret and Allow",
+    "ZRKF_STTQTY_ORIG": "STT Quantity Original",
+    "ZRKF_STT_OTHERS": "STT of Other Channels QTY",
+    "ZRKF_STT_GSV": "STT GSV (Gross Value)",
+    "ZRKF_STT_GSV_OTHERS": "STT GSV Others",
+    "ZCKF_STT_QTY": "STT Quantity result"
+  }
 }

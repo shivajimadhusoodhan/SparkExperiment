@@ -2,7 +2,8 @@ package com.madhu.nutriasia.salestotrade
 
 case class GlobalRkfConfig(
                             rkfEntities: List[RestKeyFigureEntity],
-                            ckfEntities: List[CalcKeyFigureEntity]
+                            ckfEntities: List[CalcKeyFigureEntity],
+                            logicalNameMapping: Map[String, String]
                           )
 
 case class RestKeyFigureEntity(

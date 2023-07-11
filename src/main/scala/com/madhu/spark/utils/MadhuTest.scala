@@ -14,19 +14,24 @@ object MadhuTest {//extends SparkSessionFactory {
 
     // add ClgInfo column values here
     val clgInfoDF = Seq(
-    ("XYZ", "2021-01-01", "2021-04-02T21:11:56.207Z"),
-    ("XYZ", "2021-02-01", "2021-01-02T11:13:56.207Z")
-    ).toDF("id", "dateval", "timeval")
+    ("XYZ", "2021-01-01", "2021-04-02T21:11:56.207Z", "xy"),
+    ("XYZ", "2021-02-01", "2021-01-02T11:13:56.207Z", "xy")
+    ).toDF("customer", "dateval", "timeval", "ship_to")
 
     val newDF = clgInfoDF
       .withColumn("dateval", to_date($"dateval"))
       .withColumn("timeval", to_timestamp($"timeval"))
 
-    newDF.orderBy("timeval").show(false)
-    newDF.printSchema()
+    clgInfoDF.show()
 
-    val str = "ab$,$jdsfh$,$djhf"
-    str.split("\\$,\\$").foreach(println)
+    var final_df = clgInfoDF
+
+//    final_df = final_df.withColumn("new_customer", clgInfoDF("ship_to"))
+//    final_df = final_df.withColumn("new_customer_0", clgInfoDF("customer"))
+
+    final_df = final_df.select(col("ship_to").as("customer"),
+      col("ship_to").as("ship_to"), col("customer").as("customer_0"))
+    final_df.show()
   }
 
 }

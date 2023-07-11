@@ -29,7 +29,7 @@
   ],
   "rowFieldMapping": {
     "tableMapping": {
-      "df1": [
+      "table1": [
         {
           "sourceField": "cid",
           "targetField": "id"
@@ -39,7 +39,7 @@
           "targetField": "iam_source"
         }
       ],
-      "df2": [
+      "table2": [
         {
           "sourceField": "sid",
           "targetField": "id"
@@ -52,7 +52,7 @@
     },
 
     "transformationMapping": {
-      "df1": [
+      "table1": [
         {
           "newColumnName": "humanica_num",
           "sourceColumnName": "iam_source",

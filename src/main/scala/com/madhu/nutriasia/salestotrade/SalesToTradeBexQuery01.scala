@@ -2,7 +2,7 @@ package com.madhu.nutriasia.salestotrade
 
 import com.madhu.nutriasia.ConfigReader
 import com.madhu.spark.common.SparkSessionFactory
-import org.apache.spark.sql.functions.{col, expr, lit, when}
+import org.apache.spark.sql.functions.{col, expr, lit, log, regexp_replace, when}
 import org.apache.spark.sql.{Column, DataFrame}
 
 object SalesToTradeBexQuery01 extends SparkSessionFactory with ConfigReader {
@@ -14,16 +14,30 @@ object SalesToTradeBexQuery01 extends SparkSessionFactory with ConfigReader {
     val CP_DF = spark
       .read
       .option("header", true)
-      .csv("/Users/madhusoodhanhv/Repositories/Playground/SparkExperiment/src/main/resources/SalesToTradeCP_DummyData.csv")
+//      .csv("/Users/madhusoodhanhv/Repositories/Playground/SparkExperiment/src/main/resources/SalesToTradeCP_DummyData.csv")
+//      .csv("/Users/madhusoodhanhv/Repositories/Playground/SparkExperiment/src/main/resources/ZSTT_CP01_v2.csv")
+      .csv("/Users/madhusoodhanhv/Repositories/Playground/SparkExperiment/src/main/resources/ZSTT_CP01_data.csv")
+      .withColumn("ZSTTQTY", regexp_replace(col("ZSTTQTY"), ",", ""))
+      .withColumn("ZSTTGSV", regexp_replace(col("ZSTTGSV"), ",", ""))
+      .withColumn("ZVVCAS", regexp_replace(col("ZVVCAS"), ",", ""))
+      .withColumn("ZERLOS", regexp_replace(col("ZERLOS"), ",", ""))
       .cache()
     CP_DF.show(false)
+
+    CP_DF.printSchema()
 
     val rkfConfig = getSalesToTradeQuery01Properties("SalesToTradeRKF_CKF_01.json")
 
     val RKF_DF = addRkfBasedOnRkfList(rkfConfig.rkfEntities, CP_DF)
 
     val CKF_DF = addCkfBasedOnCkfList(rkfConfig.ckfEntities, RKF_DF)
-    CKF_DF.show(false)
+    CKF_DF
+      .drop("ZVVRET", "0REC_TYPE")
+      .show(false)
+
+
+    val finalDF = renameColumnWithLogicalName(CKF_DF, rkfConfig.logicalNameMapping)
+    finalDF.show(false)
   }
 
   def addRkfBasedOnRkfList(rkfList: List[RestKeyFigureEntity], compDF: DataFrame) = {
@@ -59,5 +73,11 @@ object SalesToTradeBexQuery01 extends SparkSessionFactory with ConfigReader {
       tempDF.withColumn(ckfEntity.calcKeyFigureName, expr(ckfEntity.calcKeyFigureExpression))
     })
 //    inputDF.withColumn("stt_quantity", expr("STT_Quantity_Original + STT_Other_Channels_QTY"))
+  }
+
+  def renameColumnWithLogicalName(inputDF: DataFrame, logicalNameMapping: Map[String, String]) = {
+    logicalNameMapping.foldLeft(inputDF) { case (tempDF, (physicalName, logicalName)) =>
+      tempDF.withColumnRenamed(physicalName, "[" + physicalName + "] " + logicalName)
+    }
   }
 }
