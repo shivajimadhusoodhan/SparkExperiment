@@ -32,9 +32,17 @@ object SortDateYYYYMM extends SparkSessionFactory {
     ).toDF("input_timestamp")
 
     //Timestamp String to DateType
-    df.withColumn("datetype",
-      to_date(col("input_timestamp"), "yyyy/MM/dd"))
-      .show(false)
+    val resultDf = df
+//      .withColumn("datetype", to_date(col("input_timestamp"), "yyyy/MM/dd"))
+      .withColumn("updatedon", to_timestamp(col("input_timestamp")))
+      .withColumn("date_type", to_date($"updatedon", "yyyy-MM-dd"))
+//      .show(false)
+
+    resultDf.printSchema()
+    resultDf.filter(to_date($"updatedon", "yyyy-MM-dd").gt(lit("2019-11-15"))).show()
+//    resultDf.filter()
   }
+
+
 
 }

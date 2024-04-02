@@ -8,11 +8,11 @@ public class RentCalculator {
     public static void main(String[] args) {
 
         // variables
-        int flat1Ebill = 1969; // add 50 for solar rebate // 75303xxxx
+        int flat1Ebill = 1161; // add 50 for solar rebate // 75303xxxx
         int flat2Ebill = 0;                           // 73166xxxx
-        int flat3Ebill = 447;                            // 67450xxxx
-        int commonAreaEbill = 393; // round off to nearest number divisable by 3 // 95880xxxx
-        int roomEbill = 156;
+        int flat3Ebill = 422;                            // 67450xxxx
+        int commonAreaEbill = 303; // round off to nearest number divisable by 3 // 95880xxxx
+        int roomEbill = 285;  //66967xxxx
         //105 room
 
         
@@ -21,14 +21,14 @@ public class RentCalculator {
         int currMonth = LocalDate.now().minusMonths(1).getMonthValue();
         int numOfTenants = 3;
 
-        int flat1PrevBalance = 0;
+        int flat1PrevBalance = -280;
         int flat2PrevBalance = 0;
-        int flat3PrevBalance = 0;
-        int roomPrevBalance = 0;
+        int flat3PrevBalance = 120;
+        int roomPrevBalance = 40;
 
 
-        int flat1Rent = 13250; // March 1, 2021
-        int flat2Rent = 9000; // September 12, 2021
+        int flat1Rent = 10000; // Jan15, 2024
+        int flat2Rent = 9500; // September 12, 2021
         int flat3Rent = 9500; // April 27, 2023
         int roomRent = 3000; // May 1, 2023
 

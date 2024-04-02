@@ -15,11 +15,14 @@ object UnPivot extends SparkSessionFactory{
       ("A1", 1, 456, "1/2/2023", "3/3/2023", "3/1/2023", 2,7,4)
     ).toDF("code", "number", "order", "start_date_PRE", "start_date_MIG", "start_date_POST", "PRE", "MIG", "POST")
 
-    //inputDF.show()
+    inputDF.show()
 
     val unpivotDF1 = inputDF.select($"code", $"number",$"order",
       expr("stack(3, 'PRE', PRE, 'MIG', MIG, 'POST', POST) as (status, time)"))
       .where("time > 0")
+
+    unpivotDF1.show()
+
 
     val unpivotDF2 = inputDF.select($"code", $"number", $"order",
       expr("stack(3, 'start_date_PRE', start_date_PRE, 'start_date_MIG', start_date_MIG, 'start_date_POST', start_date_POST) as (status, start_date)"))

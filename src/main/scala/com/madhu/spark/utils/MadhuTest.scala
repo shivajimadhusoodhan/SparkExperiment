@@ -14,23 +14,27 @@ object MadhuTest {//extends SparkSessionFactory {
 
     // add ClgInfo column values here
     val clgInfoDF = Seq(
-    ("XYZ", "2021-01-01", "2021-04-02T21:11:56.207Z", "xy"),
-    ("XYZ", "2021-02-01", "2021-01-02T11:13:56.207Z", "xy")
-    ).toDF("customer", "dateval", "timeval", "ship_to")
+    ("XYZ", "2021-01-01", "2021-04-02T21:11:56.207Z", "", 2.33),
+    ("XYZ", "2021-01-01", "2021-04-02T21:11:56.207Z", "     ", 2.33),
+    ("XYZ", "2021-01-01", "2021-04-02T21:11:56.207Z", "     xy003", 2.33),
+    ("XYZ", "2021-01-01", "2021-04-02T21:11:56.207Z", "   x  y005  ", 2.33),
+    ("XYZ", "2021-01-01", "2021-04-02T21:11:56.207Z", "xy005", 2.33),
+    ("XYZ", "2021-02-01", "2021-01-02T11:13:56.207Z", "xz006   ", 2.33)
+    ).toDF("customer", "dateval", "timeval", "ship_to", "amount")
 
     val newDF = clgInfoDF
       .withColumn("dateval", to_date($"dateval"))
       .withColumn("timeval", to_timestamp($"timeval"))
+//      .withColumn("ship_to", trim(col("ship_to")))
+//      .withColumn("amount", trim(col("amount")))
 
     clgInfoDF.show()
 
-    var final_df = clgInfoDF
+    val final_df = newDF
+//      .filter(col("ship_to").equalTo(""))
+      .withColumn("newcol", when(trim(col("ship_to")).equalTo(""), lit("empty maga")) otherwise lit("great"))
 
-//    final_df = final_df.withColumn("new_customer", clgInfoDF("ship_to"))
-//    final_df = final_df.withColumn("new_customer_0", clgInfoDF("customer"))
 
-    final_df = final_df.select(col("ship_to").as("customer"),
-      col("ship_to").as("ship_to"), col("customer").as("customer_0"))
     final_df.show()
   }
 
